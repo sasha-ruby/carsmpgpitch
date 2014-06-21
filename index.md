@@ -1,0 +1,66 @@
+---
+title       : Fuel Consumption
+subtitle    : Calculates average fuel consumption based on numbers of cylinders and gears
+author      : Sasa Bogdanovic
+job         : Chief Data Analyst at Ruby Industries Inc.
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Introduction
+
+Fuel Consumption is Shiny application that calculates average fuel consumption in miles per gallon, depending on numbers of cylinders and gears.
+
+It can be accessed at https://sasha.shinyapps.io/cars.
+
+Data used for calculations is mtcars dataset.
+
+Users can easily change numbers of cylinders and gears using slider and radio butttons options.
+
+--- .class #id 
+
+## Application Layout - sidebar panel
+
+Layout is organized as a page with sidebar and main panel.
+
+Sidebar contains:
+- usage instructions - basic instructions to help user understand the purpose of the application, and how to use input controls to change the output.
+- input controls 
+  - slider control for numbers of cylinders
+  - radio buttons for number of gears
+
+---
+
+## Application layout - main panel
+Main panel is organized as a tab set with the following tabs:
+- MPG vs Number of Cylinders - contains reactive scatterplot with MPG ~ #Cylinders points, and overlayed lines for average full dataset mpg (grey color) and average mpg for selected numbers of cylinders and gears (red color).
+- MPG vs Number of Gears - contains reactive scatterplot with MPG ~ #Gears points, and overlayed lines for average full dataset mpg (grey color) and average mpg for selected numbers of cylinders and gears (red color).
+- Data table - contains reactive data table filtered for selected numbers of cylinders and gears.
+
+Main panel also shows
+- reactive text with average MPG for currently selected options (updated with every change).
+- static text with information on combinations of numbers of cylinders and gears that yield minimum nad maximum fuel consumption.
+
+---
+
+## Sample plots and data table
+
+
+
+Sample code and plots
+
+
+```r
+par(mfrow=c(1,2))
+plot(mtcars$cyl, mtcars$mpg, col="blue", xlab = "Number of cylinders", ylab = "Miles per gallon", main="MPG vs #Cyl")
+lines(c(4, 8), c(mn, mn), col="darkgrey", lwd=2); lines(c(4, 8), c(mns, mns), col="red", lwd=2)
+plot(mtcars$gear, mtcars$mpg, col="blue", xlab = "Number of gears", ylab = "Miles per gallon", main="MPG vs #Gears")
+lines(c(3, 5), c(mn, mn), col="darkgrey", lwd=2); lines(c(3, 5), c(mns, mns), col="red", lwd=2)
+```
+
+<img src="assets/fig/unnamed-chunk-2.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" />
+---
